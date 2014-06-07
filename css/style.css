@@ -14,22 +14,25 @@ menu, nav, section { display: block; }
 
 .badge {
   position: relative;
-  width: 500px;
-  height: 500px;
   border-radius: 50%;
+}
+.title {
+  color: white;
+  font: 32px "Georgia", "Helvetica Neue", "Helvetica";
 }
 
 @font-face
 {
-  font-family: myFirstFont;
+  font-family: MagicRingFont;
   src: url(MagicRing.ttf);
 }
-
-h1 span {
-  font: 24px myFirstFont, Monaco, MonoSpace;
-  height: 300px;
-  position: absolute;
-  width: 20px;
+.ring {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+.ring .token-level {
+  position: relative;
   left: 50%;
   top: 0;
   -webkit-transform-origin: 50% 50%;
@@ -37,29 +40,61 @@ h1 span {
   -ms-transform-origin: 50% 50%;
   -o-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
+  text-shadow: -1px 1px 20px rgba(237, 112, 215, 0.7), 
+                1px 1px 20px rgba(237, 112, 215, 0.7), 
+                1px -1px 20px rgba(237, 112, 215, 0.7), 
+               -1px -1px 20px rgba(237, 112, 215, 0.7);
 }
-
-h1 .token {
-  -moz-box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  -webkit-box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  color: rgba(177, 17, 22, 1) ;
+.ring .token-level-const {
+  position: relative;
+  left: 50%;
+  top: 0;
+  z-index: 999;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  text-shadow: -1px 1px 20px rgba(237, 112, 215, 0.7), 
+                1px 1px 20px rgba(237, 112, 215, 0.7), 
+                1px -1px 20px rgba(237, 112, 215, 0.7), 
+               -1px -1px 20px rgba(237, 112, 215, 0.7);
 }
-.center-content {
+.ring .token-level .token {
+  position: absolute;
+  color: #FFF;
+  font: 24px MagicRingFont, MonoSpace;
+  height: 300px;
+  width: 20px;
+  top: 0;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+.ring .center-content {
 	position: absolute;
-  	left: 50%;
-  	top: 50%;
+	left: 50%;
+	top: 50%;
 
-  	margin-top: -20px;
-  	margin-left: -30px;
+	margin-top: -20px;
+	margin-left: -30px;
 
-  	font: 32px Georgia, Monaco, MonoSpace;
-  	color: rgba(177, 17, 22, 1);
-  	font-weight: 900;
+  width: 128px;
+  height: 32px;
+	font: 32px "Georgia", "Helvetica Neue", "Helvetica";
+  color: #FFF;
+  text-align: center;
+  text-shadow: -1px 1px 16px rgba(237, 112, 215, 0.7), 
+              1px 1px 16px rgba(237, 112, 215, 0.7), 
+              1px -1px 16px rgba(237, 112, 215, 0.7), 
+             -1px -1px 16px rgba(237, 112, 215, 0.7);
+
 }
-.center-content:hover{
-  -moz-box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  -webkit-box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
+.ring .center-content:hover{
 	transition: rgba(177, 17, 22, 1) .5s;
+  -moz-box-shadow: 0px 0px 30px    rgba(237, 112, 215, 0.7);
+  -webkit-box-shadow: 0px 0px 30px rgba(237, 112, 215, 0.7);
+  box-shadow: 0px 0px 30px         rgba(237, 112, 215, 0.7);
 }

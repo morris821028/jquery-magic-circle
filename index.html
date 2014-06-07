@@ -5,18 +5,19 @@
 	<meta charset='UTF-8'>
 	
 	<title>Magic Circle</title>
-	
-	<link rel='stylesheet' href='css/style.css'>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
+<style>
+body{background:black;}
+</style>
 <script src="js/jquery.lettering.js"></script>
-<script src="js/magic.circle.simple.js"></script>
+<script src="js/jquery.magicring.plugin.js"></script>
 <script type="text/javascript">
-$(function(){
-    CreateMagicRing(200, 3, 100);
-});
+        $(document).ready(function() {
+            $('#MagicRing').magicring();
+        });
+
 </script>
 
 </head>

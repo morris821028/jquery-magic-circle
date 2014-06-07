@@ -1,6 +1,6 @@
 @font-face{
   font-family: MagicRing;
-  src: url(/MagicRing.ttf);
+  src: url(MagicRing.ttf);
 }
 
 body {
@@ -49,12 +49,12 @@ body {
  * Animation
  * ******************* */
 .ring:nth-child(2n) {
-    -webkit-animation: counter-clockwise 50s linear infinite; 
-    animation: counter-clockwise 50s linear infinite;
+    -webkit-animation: counter-clockwise linear infinite; 
+    animation: counter-clockwise linear infinite;
 }
 .ring:nth-child(2n+1) {
-    -webkit-animation: clockwise 50s linear infinite; 
-    animation: clockwise 50s linear infinite;
+    -webkit-animation: clockwise linear infinite; 
+    animation: clockwise linear infinite;
 }
 /* *******************
  * 逆時針動畫

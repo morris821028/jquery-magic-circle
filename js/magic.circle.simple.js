@@ -22,7 +22,7 @@ function CreateMagicRing(ori_h, rings, h){
   for ( var i = 0 ; i < rings ; i++ ){
     $('#MagicRing').append('<div id="Ring' + i + '" class="ring">' 
           + RandString( 360 / ( deg( (ori_h+h*i), pt2px( parseInt($('#MagicRing').css('font-size')) )*4 ) ) ) 
-          + '</div>"');
+          + '</div>');
 
   }
   var dege;
@@ -33,6 +33,11 @@ function CreateMagicRing(ori_h, rings, h){
       var count = $('#' + this.id + ' > span').length;
       dege = 360/count;
       ring_id = index;
+      $('#'+ this.id).css({'webkitanimationDuration' : (ring_id+1)*10 + 's',
+                              'MozanimationDuration' : (ring_id+1)*10 + 's',
+                               'msanimationDuration' : (ring_id+1)*10 + 's',
+                                'OanimationDuration' : (ring_id+1)*10 + 's',
+                                 'animationDuration' : (ring_id+1)*10 + 's'});
       $('#'+ this.id + ' > span').each(function(index){
           var currentdeg = dege * index;
   

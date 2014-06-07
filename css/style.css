@@ -1,20 +1,16 @@
 @font-face{
   font-family: MagicRing;
-  src: url(MagicRing.ttf);
+  src: url(/MagicRing.ttf);
 }
 
 body {
     background:black;
 }
-/*
- *
- * *******************
+/* *******************
  * Ring
- * *******************
- *
- */
+ * ******************* */
 .ring{
-    font: 24px MagicRing, Monaco, MonoSpace;
+    font: 24px MagicRing;
     color:white;
     text-shadow:-1px  1px 20px rgba(237, 112, 215, 0.7),
                  1px  1px 20px rgba(237, 112, 215, 0.7),
@@ -35,19 +31,9 @@ body {
     transform-origin: center;
 }
 
-/*
- *
- * *******************
+/* *******************
  * Ring Text
- * *******************
- *
- */
-#Ring1 span {height:150px;}
-#Ring2 span {height:250px;}
-#Ring3 span {height:350px;}
-#Ring4 span {height:450px;}
-#Ring5 span {height:550px;}
-
+ * ******************* */
 .ring span {
   position: absolute;
   margin:auto;top:0;left:0;bottom:0;right:0;
@@ -59,28 +45,20 @@ body {
   transform-origin: center;
 }
 
-/*
- *
- * *******************
+/* *******************
  * Animation
- * *******************
- *
- */
- 
+ * ******************* */
 .ring:nth-child(2n) {
-    -webkit-animation: counter-clockwise 50s linear infinite; /* Chrome, Safari, Opera */
+    -webkit-animation: counter-clockwise 50s linear infinite; 
     animation: counter-clockwise 50s linear infinite;
 }
 .ring:nth-child(2n+1) {
-    -webkit-animation: clockwise 50s linear infinite; /* Chrome, Safari, Opera */
+    -webkit-animation: clockwise 50s linear infinite; 
     animation: clockwise 50s linear infinite;
 }
-
-/* 
- * *******************
+/* *******************
  * 逆時針動畫
- * *******************
- */
+ * ******************* */
 @keyframes counter-clockwise {
   from {-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);-o-transform: rotate(0deg);transform: rotate(0deg);}
   to   {-webkit-transform: rotate(360deg);-moz-transform: rotate(360deg);-ms-transform: rotate(360deg);-o-transform: rotate(360deg);transform: rotate(360deg);}
@@ -91,11 +69,9 @@ body {
   to {-webkit-transform: rotate(360deg);-o-transform: rotate(360deg);}
 } 
 
-/* 
- * *******************
+/* *******************
  * 順時針動畫
- * *******************
- */
+ * ******************* */
 @keyframes clockwise {
   from {-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);-o-transform: rotate(0deg);transform: rotate(0deg);}
   to {-webkit-transform: rotate(-360deg);-moz-transform: rotate(-360deg);-ms-transform: rotate(-360deg);-o-transform: rotate(-360deg);transform: rotate(-360deg);}

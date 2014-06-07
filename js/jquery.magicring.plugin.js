@@ -1,6 +1,6 @@
 (function($) {
 	$.fn.extend({
-		magicring: function(option){
+		magicring: function(options){
 			var defaults = {
 				list         : 'abcdefghijklmnopqrstuvwxyz1234567890p;!@#$%^&?|',
 				font         : 'MagicRing.ttf',

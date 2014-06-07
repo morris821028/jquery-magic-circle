@@ -21,15 +21,11 @@ menu, nav, section { display: block; }
 
 @font-face
 {
-  font-family: myFirstFont;
+  font-family: MagicRingFont;
   src: url(MagicRing.ttf);
 }
-
-h1 span {
-  font: 24px myFirstFont, Monaco, MonoSpace;
-  height: 300px;
+.ring .token-level {
   position: absolute;
-  width: 20px;
   left: 50%;
   top: 0;
   -webkit-transform-origin: 50% 50%;
@@ -38,28 +34,67 @@ h1 span {
   -o-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
-
-h1 .token {
-  -moz-box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  -webkit-box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  color: rgba(177, 17, 22, 1) ;
+.ring .token-level .token {
+  position: absolute;
+  color: #FFF;
+  text-shadow: -1px 1px 20px rgba(237, 112, 215, 0.7), 
+                1px 1px 20px rgba(237, 112, 215, 0.7), 
+                1px -1px 20px rgba(237, 112, 215, 0.7), 
+               -1px -1px 20px rgba(237, 112, 215, 0.7);
+  font: 24px MagicRingFont, MonoSpace;
+  height: 300px;
+  width: 20px;
+  top: 0;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
 }
-.center-content {
+.ring .center-content {
 	position: absolute;
-  	left: 50%;
-  	top: 50%;
+	left: 50%;
+	top: 50%;
 
-  	margin-top: -20px;
-  	margin-left: -30px;
+	margin-top: -20px;
+	margin-left: -30px;
 
-  	font: 32px Georgia, Monaco, MonoSpace;
-  	color: rgba(177, 17, 22, 1);
-  	font-weight: 900;
+	font: 32px "Georgia", "Helvetica Neue", "Helvetica";
+  color: #FFF;
+  text-align: center;
+  text-shadow: -1px 1px 16px rgba(237, 112, 215, 0.7), 
+              1px 1px 16px rgba(237, 112, 215, 0.7), 
+              1px -1px 16px rgba(237, 112, 215, 0.7), 
+             -1px -1px 16px rgba(237, 112, 215, 0.7);
 }
-.center-content:hover{
-  -moz-box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  -webkit-box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
-  box-shadow: 0px 0px 30px rgba(177, 17, 22, 1);
+.ring .center-content:hover{
 	transition: rgba(177, 17, 22, 1) .5s;
+}
+
+.elem {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+.elem:hover {
+    -webkit-animation-name: rotate; 
+    -webkit-animation-duration: 2s; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: rotate; 
+    -moz-animation-duration: 2s; 
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
 }

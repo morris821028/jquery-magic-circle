@@ -10,4 +10,4 @@ And I make ur magic circle less lag.
 - Chrome, Firefox can be worked now.
 
 ## Problem ##
-Can't confirm other explores be worked or not.
+Unable to confirm can be worked at other browsers or not.

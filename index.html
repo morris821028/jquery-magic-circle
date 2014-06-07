@@ -16,9 +16,11 @@
 	<script src="js/jquery.magic.square.js"></script>
 	<script>
 	  $(function() {
-	      $("h1").magicsquare('fire');
+	      $("#test1").magicsquare('fire');
+	      $("#test2").magicsquare('fire');
 	      $(".center-content").click(function() {
-	          $("h1").magicsquare('boom');
+	          $("#test1").magicsquare('boom');
+	          $("#test2").magicsquare('boom');
 	      });
 		});
 	</script>
@@ -29,10 +31,14 @@
 
 	<div id="page-wrap">
 		<div class="badge">
-		  	<h1>
+			<h1 class="title"> Magic Circle (morris1028) <h1>
+		  	<div id="test1">
 		  		1324568703210658a4s0d351a4s30201c06x5z403DS1f4SA1a23dg165a0 s4g3as5dgsad54s3ad2fASDasdlkjaosiuj1029k,mv.czxcv'okopi
-		  	</h1>
+		  	</div>
       		<div class="ring center-content">CLICK</div>
+      		<div id="test2" style="position: absolute; top: -100px; left: 300px;">
+		  		12481632128256512102420484096809632767655362621441
+		  	</div>
 	  	</div>
 	</div>
 </body>

@@ -1,17 +1,19 @@
 (function($) {
 	var radius = 500,
 		radius_padding = 150;
-	var fireRecord = [];
+	var fireRecord = [],
+		magic_circle = 0;
 	var lightTimer;
 
 	var lightMagic = function(elem) {
-
-		var circle = 1;
+		var os = magic_circle % 50,
+			s = Math.floor((Math.abs(os - 25) * Math.abs(os - 25)) / 625 * 100),
+			circle = 1;
 		var $container = elem;
 
 		$container.find(".token-level").each(function(index) {
 
-			var deg = fireRecord[circle];
+			var deg = fireRecord[circle] % 720;
 
 			deg = Math.floor(deg);
 
@@ -20,44 +22,62 @@
 			$(this).css('-ms-transform', 'rotate(' + deg + 'deg)');
 			$(this).css('-o-transform', 'rotate(' + deg + 'deg)');
 			$(this).css('transform', 'rotate(' + deg + 'deg)');
+
+			$(this).css('text-shadow', '-1px 1px ' + s + 'px rgba(237, 112, 215, 0.7),' + '1px 1px ' + s + 'px rgba(237, 112, 215, 0.7),' + '1px -1px ' + s + 'px rgba(237, 112, 215, 0.7),' + '-1px -1px ' + s + 'px rgba(237, 112, 215, 0.7);');
+
 			circle++;
 		});
-	}
-	function addWidget(container, widget, circle) {
-		var height = radius - (circle - 1) * radius_padding;
-		var top = (circle - 1) * radius_padding / 2;
-		widget.css('top', top + 'px');
-		widget.css('left', top + 'px');
-		widget.css('height', height + 'px');
-		widget.css('width', height + 'px');
+		magic_circle++;
 	}
 
+		function addWidget(container, widget, circle, attrHeight) {
+			var height = radius - (circle - 1) * radius_padding;
+			var top = (circle - 1) * radius_padding / 2;
+			widget.css('top', attrHeight + radius_padding + 'px');
+			widget.css('left', top + 'px');
+			widget.css('height', height + 'px');
+			widget.css('width', height + 'px');
+			return attrHeight - height - radius_padding/2;
+		}
+
 	var makeupMagic = function(elem) {
-		var circle = 1,
+		var circle = 4;
 			circle_start = 0;
 		var $container = elem,
-			$widget = $('<div class="token-level"></div>');
+			$widget = $('<div class="token-level-const"></div>');
+		var attrHeight = radius_padding;
 
 		$container.addClass("ring");
 		$widget.appendTo($container);
+		
+		$(document).find(".center-content").each(function() {
+			$(this).css('top', '32px');
+			$(this).css('left', '-10px');
+			$(this).appendTo($widget);
+		});
+		attrHeight = addWidget($container, $widget, circle, attrHeight);
+		$widget = $('<div class="token-level"></div>');
+		$widget.appendTo($container);
+
+		circle--;
 		fireRecord[circle] = 0;
 		$container.find("span").each(function(index) {
 			var deg = (Math.log(circle) * circle * circle * circle * circle / 128 + 1) * 7 * (index - circle_start);
 			if (deg >= 360) {
-				addWidget($container, $widget, circle);
+				attrHeight = addWidget($container, $widget, circle, attrHeight);
 				$widget = $('<div class="token-level"></div>');
-				$widget.appendTo($container);				
+				$widget.appendTo($container);
 				deg = 0;
 				circle_start = index;
-				circle++;
+				circle--;
 				fireRecord[circle] = 0;
 			}
 
 			var height = radius - (circle - 1) * radius_padding;
 
-			$(this).css('top', '5px');
+			$(this).css('top', '0px');
 			$(this).css('height', height + 'px');
-			$(this).css('left', height/2-10 + 'px');
+			$(this).css('left', height / 2 - 10 + 'px');
 			$(this).css('-webkit-transform', 'rotate(' + deg + 'deg)');
 			$(this).css('-moz-transform', 'rotate(' + deg + 'deg)');
 			$(this).css('-ms-transform', 'rotate(' + deg + 'deg)');
@@ -69,23 +89,10 @@
 			$(this).addClass("token");
 			$(this).appendTo($widget);
 		});
-
-		var height = radius - (circle - 1) * radius_padding;
-		var top = (circle - 1) * radius_padding / 2;
-		addWidget($container, $widget, circle);
-		$widget = $('<div class="token-level"></div>');
-		$widget.appendTo($container);
-		circle++;
-		$(document).find(".center-content").each(function() {
-			var height = radius - (circle - 1) * radius_padding;
-			$(this).css('top', height/2 + 'px');
-			$(this).css('left', '10px');
-			$(this).css('height', height + 'px');
-			$(this).css('width', height + 'px');
-			$(this).appendTo($widget);			
-		});
-		addWidget($container, $widget, circle);
-		lightTimer = setInterval(lightMagic, 60, elem);
+		attrHeight = addWidget($container, $widget, circle, attrHeight);
+		circle--;
+		fireRecord[circle] = 0;
+		lightTimer = setInterval(lightMagic, 80, elem);
 	}
 
 	var runMagic = function() {
@@ -113,38 +120,40 @@
 		var fireTimer = setInterval(runMagicRandom, 100);
 	}
 
-	function sleep(elem, millis, callback) {
-		
-		var $container = elem;
-		var level = $container.find('.token-level').first();
-		function myAnimation(tag) {
-			if(!tag)	return;
-			var w = tag;
-			w.addClass('animated rotateOut');
-			sleepN(w, 500, function(tag) {
-				myAnimation(tag.next());
-			});
+		function sleep(elem, millis, callback) {
+
+			var $container = elem;
+			var level = $container.find('.token-level').first();
+
+			function myAnimation(tag) {
+				if (!tag) return;
+				var w = tag;
+				w.addClass('animated rotateOut');
+				sleepN(w, 500, function(tag) {
+					myAnimation(tag.next());
+				});
+			}
+			myAnimation(level);
+
+			setTimeout(function() {
+				callback();
+			}, millis);
 		}
-		myAnimation(level);
 
-		setTimeout(function() {
-			callback();
-		}, millis);
-	}
-
-	function sleepN(elem, millis, callback) {
-		setTimeout(function() {
-			callback(elem);
-		}, millis);
-	}
+		function sleepN(elem, millis, callback) {
+			setTimeout(function() {
+				callback(elem);
+			}, millis);
+		}
 
 	var boomMagic = function(elem) {
 		clearInterval(lightTimer);
 		var $container = elem;
 		sleep(elem, 3000, function() {
 			var level = $container.find('.token-level').first();
+
 			function myAnimation(tag) {
-				if(!tag)	return;
+				if (!tag) return;
 				var w = tag;
 				w.removeClass('rotateOut');
 				w.addClass('rotateIn');

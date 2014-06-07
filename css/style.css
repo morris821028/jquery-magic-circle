@@ -14,9 +14,11 @@ menu, nav, section { display: block; }
 
 .badge {
   position: relative;
-  width: 500px;
-  height: 500px;
   border-radius: 50%;
+}
+.title {
+  color: white;
+  font: 32px "Georgia", "Helvetica Neue", "Helvetica";
 }
 
 @font-face
@@ -24,8 +26,13 @@ menu, nav, section { display: block; }
   font-family: MagicRingFont;
   src: url(MagicRing.ttf);
 }
+.ring {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
 .ring .token-level {
-  position: absolute;
+  position: relative;
   left: 50%;
   top: 0;
   -webkit-transform-origin: 50% 50%;
@@ -33,14 +40,29 @@ menu, nav, section { display: block; }
   -ms-transform-origin: 50% 50%;
   -o-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-}
-.ring .token-level .token {
-  position: absolute;
-  color: #FFF;
   text-shadow: -1px 1px 20px rgba(237, 112, 215, 0.7), 
                 1px 1px 20px rgba(237, 112, 215, 0.7), 
                 1px -1px 20px rgba(237, 112, 215, 0.7), 
                -1px -1px 20px rgba(237, 112, 215, 0.7);
+}
+.ring .token-level-const {
+  position: relative;
+  left: 50%;
+  top: 0;
+  z-index: 999;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  text-shadow: -1px 1px 20px rgba(237, 112, 215, 0.7), 
+                1px 1px 20px rgba(237, 112, 215, 0.7), 
+                1px -1px 20px rgba(237, 112, 215, 0.7), 
+               -1px -1px 20px rgba(237, 112, 215, 0.7);
+}
+.ring .token-level .token {
+  position: absolute;
+  color: #FFF;
   font: 24px MagicRingFont, MonoSpace;
   height: 300px;
   width: 20px;
@@ -59,6 +81,8 @@ menu, nav, section { display: block; }
 	margin-top: -20px;
 	margin-left: -30px;
 
+  width: 128px;
+  height: 32px;
 	font: 32px "Georgia", "Helvetica Neue", "Helvetica";
   color: #FFF;
   text-align: center;
@@ -66,35 +90,11 @@ menu, nav, section { display: block; }
               1px 1px 16px rgba(237, 112, 215, 0.7), 
               1px -1px 16px rgba(237, 112, 215, 0.7), 
              -1px -1px 16px rgba(237, 112, 215, 0.7);
+
 }
 .ring .center-content:hover{
 	transition: rgba(177, 17, 22, 1) .5s;
-}
-
-.elem {
-    -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 1s;
-
-    -moz-transition-property: -moz-transform;
-    -moz-transition-duration: 1s;
-}
-.elem:hover {
-    -webkit-animation-name: rotate; 
-    -webkit-animation-duration: 2s; 
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-
-    -moz-animation-name: rotate; 
-    -moz-animation-duration: 2s; 
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-}
-@-webkit-keyframes rotate {
-    from {-webkit-transform: rotate(0deg);}
-    to {-webkit-transform: rotate(360deg);}
-}
-
-@-moz-keyframes rotate {
-    from {-moz-transform: rotate(0deg);}
-    to {-moz-transform: rotate(360deg);}
+  -moz-box-shadow: 0px 0px 30px    rgba(237, 112, 215, 0.7);
+  -webkit-box-shadow: 0px 0px 30px rgba(237, 112, 215, 0.7);
+  box-shadow: 0px 0px 30px         rgba(237, 112, 215, 0.7);
 }

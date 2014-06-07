@@ -28,6 +28,11 @@
 								+'.ring{font:24px MagicRing;color:#fff;text-shadow:-1px 1px 20px rgba(237,112,215,.7),1px 1px 20px rgba(237,112,215,.7),1px -1px 20px rgba(237,112,215,.7),-1px -1px 20px rgba(237,112,215,.7);position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%;margin:auto;-webkit-transform-origin:center;-moz-transform-origin:center;-ms-transform-origin:center;-o-transform-origin:center;transform-origin:center}.ring span{position:absolute;margin:auto;top:0;left:0;bottom:0;right:0;width:20px;-webkit-transform-origin:center;-moz-transform-origin:center;-ms-transform-origin:center;-o-transform-origin:center;transform-origin:center}.ring:nth-child(2n){-webkit-animation:counter-clockwise linear infinite;animation:counter-clockwise linear infinite}.ring:nth-child(2n+1){-webkit-animation:clockwise linear infinite;animation:clockwise linear infinite}@keyframes counter-clockwise{from{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);-o-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes counter-clockwise{from{-webkit-transform:rotate(0deg);-o-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg);-o-transform:rotate(360deg)}}@keyframes clockwise{from{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);-o-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(-360deg);-moz-transform:rotate(-360deg);-ms-transform:rotate(-360deg);-o-transform:rotate(-360deg);transform:rotate(-360deg)}}@-webkit-keyframes clockwise{from{-webkit-transform:rotate(0deg);-o-transform:rotate(0deg)}to{-webkit-transform:rotate(-360deg);-o-transform:rotate(-360deg)}}'
 								+'</style>');
 				
+				obj.css({'overflow' : 'hidden',
+					     'position' : 'relative',
+					     'width'    : (ht+sl*ri+20) + 'px',
+					     'height'   : (ht+sl*ri+20) + 'px'});
+
 				function RandString(int_x) {
 				  	var temp="";
 				  	console.log(lt.length);

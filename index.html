@@ -4,49 +4,29 @@
 <head>
 	<meta charset='UTF-8'>
 	
-	<title>Type on Circle</title>
-	
-	<link rel='stylesheet' href='css/style.css'>
-	<link rel='stylesheet' href='css/animate.css'>
+	<title>Magic Circle</title>
 
-	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<style>
+body{background:black;}
+</style>
+<script src="src/jquery.lettering.js"></script>
+<script src="src/jquery.magicring.plugin.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#MagicRing').magicring({font : "src/MagicRing.ttf" , spacing : 120 });
+        });
 
-	<script src="js/jquery.lettering.js"></script>
-	<script src="js/jquery.magic.square.js"></script>
-	<script>
-	  $(function() {
-	      $("#test1").magicsquare('fire', {radius: 500, radius_padding: 150,
-				radius_center: 200,	duration: 10});
-
-	      $("#test2").magicsquare('fire', {radius: 300, radius_padding: 50,
-				radius_center: 50,	duration: 30});
-
-	      $("#test1").draggable();
-	      $("#test2").draggable();
-	      $(".center-content").click(function() {
-	          $("#test1").magicsquare('boom');
-	          $("#test2").magicsquare('boom');
-	      });
-		});
-	</script>
+</script>
 
 </head>
 
 <body>
-	<a href="https://github.com/morris821028/jquery-magic-circle"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
-	<div id="page-wrap">
-		<div class="badge">
-			<h1 class="title"> Magic Circle (morris1028) <h1>
-		  	<div id="test1">
-		  		1324568f4SA1a23dg165a0 s4g3as5dgsad54s3ad2fASDasdlkjaosiuj1029k,mv.czxcv'okopi
-		  	</div>
-      		<div class="ring center-content">CLICK</div>
-      		<div id="test2" style="position: absolute; top: -100px; left: 300px;">
-		  		1248163212825651809632767655362621441
-		  	</div>
-	  	</div>
+
+	<div id='MagicRing'>
 	</div>
+	
 </body>
 
 </html>

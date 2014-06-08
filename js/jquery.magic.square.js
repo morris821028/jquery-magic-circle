@@ -1,143 +1,186 @@
 (function($) {
-	var radius = 500,
-		radius_padding = 150;
-	var fireRecord = [],
-		magic_circle = 0;
+	var magic_circle = 0;
 	var lightTimer;
 
-	var lightMagic = function(elem) {
-		var os = magic_circle % 50,
-			s = Math.floor((Math.abs(os - 25) * Math.abs(os - 25)) / 625 * 100),
-			circle = 1;
+	var lightMagic = function(elem, options) {
+		var radius = options.radius,
+			radius_padding = options.radius_padding,
+			radius_center = options.radius_center,
+			duration = options.duration;
+
+		var os = magic_circle % 50;
 		var $container = elem;
+		os = Math.floor((Math.abs(os - 25) * Math.abs(os - 25)) / 625 * 100);
 
 		$container.find(".token-level").each(function(index) {
+			$(this).css('text-shadow', '-1px 1px ' + os + 'px rgba(237, 112, 215, 0.7),' + '1px 1px ' + os + 'px rgba(237, 112, 215, 0.7),' + '1px -1px ' + os + 'px rgba(237, 112, 215, 0.7),' + '-1px -1px ' + os + 'px rgba(237, 112, 215, 0.7);');
+			if (Math.random() < 0.01) {
+				modifyDuration($(this), 5);
+				var level = $(this).find('.token').first();
+				var recover = level;
+				myAnimation2(level, function() {
 
-			var deg = fireRecord[circle] % 720;
-
-			deg = Math.floor(deg);
-
-			$(this).css('-webkit-transform', 'rotate(' + deg + 'deg)');
-			$(this).css('-moz-transform', 'rotate(' + deg + 'deg)');
-			$(this).css('-ms-transform', 'rotate(' + deg + 'deg)');
-			$(this).css('-o-transform', 'rotate(' + deg + 'deg)');
-			$(this).css('transform', 'rotate(' + deg + 'deg)');
-
-			$(this).css('text-shadow', '-1px 1px ' + s + 'px rgba(237, 112, 215, 0.7),' + '1px 1px ' + s + 'px rgba(237, 112, 215, 0.7),' + '1px -1px ' + s + 'px rgba(237, 112, 215, 0.7),' + '-1px -1px ' + s + 'px rgba(237, 112, 215, 0.7);');
-
-			circle++;
+				});
+				sleepN($(this), 3000, function(tag) {
+					modifyDuration(tag, duration);
+					myAnimation3(level);
+				});
+			}
 		});
 		magic_circle++;
 	}
 
-		function addWidget(container, widget, circle, attrHeight) {
-			var height = radius - (circle - 1) * radius_padding;
-			var top = (circle - 1) * radius_padding / 2;
-			widget.css('top', attrHeight + radius_padding + 'px');
-			widget.css('left', top + 'px');
+		function addWidget(container, widget, radius, attrHeight) {
+			var height = radius;
+			widget.css('top', attrHeight + 'px');
+			widget.css('left', '0px');
 			widget.css('height', height + 'px');
 			widget.css('width', height + 'px');
-			return attrHeight - height - radius_padding/2;
+			return attrHeight - height;
 		}
 
-	var makeupMagic = function(elem) {
-		var circle = 4;
-			circle_start = 0;
+		function addAnimation(widget, circle, duration) {
+			widget.css({
+				'webkitanimationDuration': duration + 's',
+				'MozanimationDuration': duration + 's',
+				'msanimationDuration': duration + 's',
+				'OanimationDuration': duration + 's',
+				'animationDuration': duration + 's'
+			});
+			if (circle % 2 == 0)
+				widget.addClass('counter-clockwise');
+			else
+				widget.addClass('clockwise');
+		}
+
+		function modifyDuration(tag, duration) {
+			tag.css({
+				'webkitanimationDuration': duration + 's',
+				'MozanimationDuration': duration + 's',
+				'msanimationDuration': duration + 's',
+				'OanimationDuration': duration + 's',
+				'animationDuration': duration + 's'
+			});
+		}
+	var makeupMagic = function(elem, options) {
+		var radius = options.radius,
+			radius_padding = options.radius_padding,
+			radius_center = options.radius_center,
+			duration = options.duration;
+
+		var circle = 5;
 		var $container = elem,
 			$widget = $('<div class="token-level-const"></div>');
 		var attrHeight = radius_padding;
 
+		circle_start = 0;
+
 		$container.addClass("ring");
 		$widget.appendTo($container);
-		
 		$(document).find(".center-content").each(function() {
-			$(this).css('top', '32px');
-			$(this).css('left', '-10px');
+			$(this).css({
+				'top': radius/2 + 'px',
+				'left': radius/2-32 + 'px'
+			});
 			$(this).appendTo($widget);
 		});
-		attrHeight = addWidget($container, $widget, circle, attrHeight);
+		attrHeight = addWidget($container, $widget, radius, attrHeight);
+		/* first circle */
 		$widget = $('<div class="token-level"></div>');
 		$widget.appendTo($container);
-
+		addAnimation($widget, circle, duration);
 		circle--;
-		fireRecord[circle] = 0;
 		$container.find("span").each(function(index) {
-			var deg = (Math.log(circle) * circle * circle * circle * circle / 128 + 1) * 7 * (index - circle_start);
-			if (deg >= 360) {
-				attrHeight = addWidget($container, $widget, circle, attrHeight);
+			var height = radius - (circle - 1) * radius_padding + radius_center,
+				distTop = (radius - height) / 2,
+				distLeft = radius / 2 - 10;
+			var currentdeg = 360 / (height / 12) * (index - circle_start);
+			if (currentdeg >= 360) {
+				attrHeight = addWidget($container, $widget, radius, attrHeight);
+				/* new circle */
 				$widget = $('<div class="token-level"></div>');
 				$widget.appendTo($container);
-				deg = 0;
+				addAnimation($widget, circle, duration);
+
 				circle_start = index;
 				circle--;
-				fireRecord[circle] = 0;
+				height = radius - (circle - 1) * radius_padding + radius_center;
+				distTop = (radius - height) / 2;
+				distLeft = radius / 2 - 10;
 			}
 
-			var height = radius - (circle - 1) * radius_padding;
-
-			$(this).css('top', '0px');
-			$(this).css('height', height + 'px');
-			$(this).css('left', height / 2 - 10 + 'px');
-			$(this).css('-webkit-transform', 'rotate(' + deg + 'deg)');
-			$(this).css('-moz-transform', 'rotate(' + deg + 'deg)');
-			$(this).css('-ms-transform', 'rotate(' + deg + 'deg)');
-			$(this).css('-o-transform', 'rotate(' + deg + 'deg)');
-			$(this).css('transform', 'rotate(' + deg + 'deg)');
-
-			var text = $(this).text();
-			$(this).html(text);
+			$(this).css({
+				'top': distTop + 'px',
+				'left': distLeft + 'px',
+				'height': height + 'px'
+			});
+			$(this).css({
+				'webkitTransform': 'rotate(' + currentdeg + 'deg)',
+				'MozTransform': 'rotate(' + currentdeg + 'deg)',
+				'msTransform': 'rotate(' + currentdeg + 'deg)',
+				'OTransform': 'rotate(' + currentdeg + 'deg)',
+				'transform': 'rotate(' + currentdeg + 'deg)'
+			});
 			$(this).addClass("token");
 			$(this).appendTo($widget);
 		});
-		attrHeight = addWidget($container, $widget, circle, attrHeight);
-		circle--;
-		fireRecord[circle] = 0;
-		lightTimer = setInterval(lightMagic, 80, elem);
+		attrHeight = addWidget($container, $widget, radius, attrHeight);
+		lightTimer = setInterval(function() {
+			lightMagic(elem, options);
+		}, 500);
 	}
 
-	var runMagic = function() {
-		for (var i in fireRecord) {
-			var deg = (Math.log(i) * i / 6 + 1);
-			if (i % 2 == 0)
-				fireRecord[i] += deg;
-			else
-				fireRecord[i] -= deg;
+		function rotateInAndOut(tag, millis, callback) {
+			tag.addClass('animated flash');
+			sleepN(tag, millis, function(tag) {
+				tag.removeClass('flash');
+				callback(tag);
+			});
 		}
-	}
 
-	var runMagicRandom = function() {
-		for (var i in fireRecord) {
-			var deg = (Math.log(i) * i / 3 + 1);
-			deg *= Math.log(i + 1);
-			if (i % 2 == 0)
-				fireRecord[i] += deg;
-			else
-				fireRecord[i] -= deg;
+		function fadeOut(tag, millis, callback) {
+			tag.addClass('animated fadeOut');
+			sleepN(tag, millis, function(tag) {
+				tag.fadeOut();
+				callback(tag);
+			});
 		}
-	}
 
-	var fireMagic = function(elem) {
-		var fireTimer = setInterval(runMagicRandom, 100);
-	}
+		function fadeIn(tag, millis, callback) {
+			tag.addClass('animated fadeIn');
+			sleepN(tag, millis, function(tag) {
+				tag.fadeIn();
+				callback(tag);
+			});
+		}
 
-		function sleep(elem, millis, callback) {
+		function myAnimation(tag) {
+			if (!tag) return;
+			rotateInAndOut(tag, 3000, function(tag) {
+				myAnimation(tag.next());
+			});
+		}
 
-			var $container = elem;
-			var level = $container.find('.token-level').first();
-
-			function myAnimation(tag) {
-				if (!tag) return;
-				var w = tag;
-				w.addClass('animated rotateOut');
-				sleepN(w, 500, function(tag) {
-					myAnimation(tag.next());
-				});
+		function myAnimation2(tag, callback) {
+			if (!tag) {
+				callback(tag);
+				return;
 			}
-			myAnimation(level);
+			fadeOut(tag, 100, function(tag) {
+				myAnimation2(tag.next());
+				tag.removeClass('fadeOut');
+			});
+		}
 
-			setTimeout(function() {
-				callback();
-			}, millis);
+		function myAnimation3(tag, callback) {
+			if (!tag) {
+				callback(tag);
+				return;
+			}
+			fadeIn(tag, 100, function(tag) {
+				myAnimation3(tag.next());
+				tag.removeClass('fadeIn');
+			});
 		}
 
 		function sleepN(elem, millis, callback) {
@@ -146,31 +189,21 @@
 			}, millis);
 		}
 
-	var boomMagic = function(elem) {
+	var boomMagic = function(elem, options) {
 		clearInterval(lightTimer);
+		var radius = options.radius,
+			radius_padding = options.radius_padding,
+			radius_center = options.radius_center,
+			duration = options.duration;
 		var $container = elem;
-		sleep(elem, 3000, function() {
-			var level = $container.find('.token-level').first();
-
-			function myAnimation(tag) {
-				if (!tag) return;
-				var w = tag;
-				w.removeClass('rotateOut');
-				w.addClass('rotateIn');
-				sleepN(w, 500, function(tag) {
-					myAnimation(tag.next());
-				});
-			}
-			myAnimation(level);
-			// $container.find('.token-level').each(function(index) {
-			// 	$(this).removeClass('rotateOut');
-			// 	$(this).addClass('rotateIn');
-			// });
-			lightTimer = setInterval(lightMagic, 100, elem);
-			sleepN(elem, 3000, function() {
-				$container.find('.token-level').each(function(index) {
-					$(this).removeClass('rotateIn');
-				});
+		var level = $container.find('.token-level').first();
+		myAnimation(level);
+		sleepN(elem, 10000, function() {
+			lightTimer = setInterval(function() {
+				lightMagic(elem, options);
+			}, 500);
+			$container.find('.token-level').each(function(index) {
+				modifyDuration($(this), duration);
 			});
 		});
 	}
@@ -183,17 +216,33 @@
 
 		},
 
-		fire: function() {
+		fire: function(options) {
+			var defaults = {
+				radius: 300,
+				radius_padding: 150,
+				radius_center: 250,
+				duration: 20
+			};
+
+			var options = $.extend(defaults, options);
+
 			return this.each(function() {
 				$(this).lettering();
-				makeupMagic($(this));
-				fireMagic($(this));
+				makeupMagic($(this), options);
 			});
 		},
 
-		boom: function() {
+		boom: function(options) {
+			var defaults = {
+				radius: 300,
+				radius_padding: 150,
+				radius_center: 250,
+				duration: 20
+			};
+
+			var options = $.extend(defaults, options);
 			return this.each(function() {
-				boomMagic($(this));
+				boomMagic($(this), options);
 			});
 		}
 	};

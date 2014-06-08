@@ -16,8 +16,14 @@
 	<script src="js/jquery.magic.square.js"></script>
 	<script>
 	  $(function() {
-	      $("#test1").magicsquare('fire');
-	      $("#test2").magicsquare('fire');
+	      $("#test1").magicsquare('fire', {radius: 500, radius_padding: 150,
+				radius_center: 200,	duration: 10});
+
+	      $("#test2").magicsquare('fire', {radius: 300, radius_padding: 50,
+				radius_center: 50,	duration: 30});
+
+	      $("#test1").draggable();
+	      $("#test2").draggable();
 	      $(".center-content").click(function() {
 	          $("#test1").magicsquare('boom');
 	          $("#test2").magicsquare('boom');
@@ -33,11 +39,11 @@
 		<div class="badge">
 			<h1 class="title"> Magic Circle (morris1028) <h1>
 		  	<div id="test1">
-		  		1324568703210658a4s0d351a4s30201c06x5z403DS1f4SA1a23dg165a0 s4g3as5dgsad54s3ad2fASDasdlkjaosiuj1029k,mv.czxcv'okopi
+		  		1324568f4SA1a23dg165a0 s4g3as5dgsad54s3ad2fASDasdlkjaosiuj1029k,mv.czxcv'okopi
 		  	</div>
       		<div class="ring center-content">CLICK</div>
       		<div id="test2" style="position: absolute; top: -100px; left: 300px;">
-		  		12481632128256512102420484096809632767655362621441
+		  		1248163212825651809632767655362621441
 		  	</div>
 	  	</div>
 	</div>

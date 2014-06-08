@@ -1,6 +1,7 @@
 (function($) {
-	var radius = 500,
-		radius_padding = 120;
+	var radius = 600,
+		radius_padding = 150,
+		radius_center = 250;
 	var magic_circle = 0;
 	var lightTimer;
 
@@ -11,7 +12,7 @@
 
 		$container.find(".token-level").each(function(index) {
 			$(this).css('text-shadow', '-1px 1px ' + os + 'px rgba(237, 112, 215, 0.7),' + '1px 1px ' + os + 'px rgba(237, 112, 215, 0.7),' + '1px -1px ' + os + 'px rgba(237, 112, 215, 0.7),' + '-1px -1px ' + os + 'px rgba(237, 112, 215, 0.7);');
-			if (Math.random() < 0.05) {
+			if (Math.random() < 0.01) {
 				modifyDuration($(this), 5);
 				var level = $(this).find('.token').first();
 				var recover = level;
@@ -60,7 +61,7 @@
 			});
 		}
 	var makeupMagic = function(elem) {
-		var circle = 4;
+		var circle = 5;
 		circle_start = 0;
 		var $container = elem,
 			$widget = $('<div class="token-level-const"></div>');
@@ -81,7 +82,7 @@
 		addAnimation($widget, circle, du);
 		circle--;
 		$container.find("span").each(function(index) {
-			var currentdeg = (Math.log(circle) * circle * circle * circle * circle / 128 + 1) * 7 * (index - circle_start);
+			var currentdeg = (Math.log(circle) * circle * circle * circle * circle / 128 + 1) * 8 * (index - circle_start);
 			if (currentdeg >= 360) {
 				attrHeight = addWidget($container, $widget, circle, attrHeight);
 
@@ -93,7 +94,7 @@
 				circle--;
 			}
 
-			var height = radius - (circle - 1) * radius_padding,
+			var height = radius - (circle - 1) * radius_padding + radius_center,
 				distTop = (radius - height) / 2,
 				distLeft = radius / 2 - 10;
 			$(this).css({

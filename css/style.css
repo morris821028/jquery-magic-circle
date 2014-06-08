@@ -10,7 +10,7 @@ body { font: 14px Georgia, serif; background: black;}
 article, aside, figure, footer, header, hgroup,
 menu, nav, section { display: block; }
 
-#page-wrap { width: 960px; margin: 80px auto; }
+#page-wrap { width: 960px; height: 1080px; margin: 80px auto; }
 
 .badge {
   position: relative;

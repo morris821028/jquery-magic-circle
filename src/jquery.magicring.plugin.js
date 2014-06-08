@@ -3,7 +3,7 @@
 		magicring: function(options){
 			var defaults = {
 				list         : 'abcdefghijklmnopqrstuvwxyz1234567890p;!@#$%^&?|',
-				font         : 'src/MagicRing.ttf',
+				font         : 'MagicRing.ttf',
 				baseduration : 5,
 				height       : 200,
 				rings        : 3,

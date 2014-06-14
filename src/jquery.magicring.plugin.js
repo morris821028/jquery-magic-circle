@@ -7,7 +7,9 @@
 				baseduration : 5,
 				height       : 200,
 				rings        : 3,
-				spacing      : 90
+				spacing      : 90,
+				SkewX        : 0,
+				SkewY        : 0
 			};		
 
 			var options = $.extend(defaults, options);
@@ -22,6 +24,8 @@
 				var ri = o.rings;
 				var sl = o.spacing;
 				var ft = o.font;
+				var SX = o.SkewX;
+				var SY = o.SkewY;
 
 				$('head').append('<style>'
 								+'@font-face{font-family: MagicRing;src: url(' + ft + ');}'
@@ -31,7 +35,12 @@
 				obj.css({'overflow' : 'hidden',
 					     'position' : 'relative',
 					     'width'    : (ht+sl*ri+20) + 'px',
-					     'height'   : (ht+sl*ri+20) + 'px'});
+					     'height'   : (ht+sl*ri+20) + 'px',
+					     'webkitTransform' : 'skewX(' + SX + 'deg) skewY(' + SY + 'deg) ',
+					        'MozTransform' : 'skewX(' + SX + 'deg) skewY(' + SY + 'deg) ',
+					         'msTransform' : 'skewX(' + SX + 'deg) skewY(' + SY + 'deg) ',
+					          'OTransform' : 'skewX(' + SX + 'deg) skewY(' + SY + 'deg) ',
+					           'transform' : 'skewX(' + SX + 'deg) skewY(' + SY + 'deg) ',});
 
 				function RandString(int_x) {
 				  	var temp="";
